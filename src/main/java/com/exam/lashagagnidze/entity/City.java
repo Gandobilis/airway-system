@@ -2,21 +2,22 @@ package com.exam.lashagagnidze.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "CITIES")
+@Table(name = "cities")
 public class City extends AppEntity {
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @SequenceGenerator(name = "cityIdSeq", sequenceName = "CITY_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cityIdSeq")
-    private Long id;
+    Long id;
 
-    @Column(name = "NAME", nullable = false, unique = true)
-    private String name;
+    @Column(name = "name", nullable = false, unique = true)
+    String name;
 
     public City(String name) {
         this.name = name;

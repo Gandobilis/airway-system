@@ -2,26 +2,27 @@ package com.exam.lashagagnidze.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "TICKETS")
+@Table(name = "tickets")
 public class Ticket extends AppEntity {
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @SequenceGenerator(name = "ticketIdSeq", sequenceName = "TICKET_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticketIdSeq")
-    private Long id;
+    Long id;
 
-    @Column(name = "PASSENGER_NAME")
-    private String passengerName;
+    @Column(name = "passenger_name", nullable = false)
+    String passengerName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
+    Flight flight;
 
     public Ticket(String passengerName, Flight flight) {
         this.passengerName = passengerName;

@@ -1,28 +1,30 @@
 package com.exam.lashagagnidze.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "FLIGHTS")
+@Table(name = "flights")
 public class Flight extends AppEntity {
     @Id
-    @Column(name = "ID", updatable = false)
+    @Column(name = "id")
     @SequenceGenerator(name = "flightIdSeq", sequenceName = "FLIGHT_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flightIdSeq")
-    private Long id;
+    Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "departure_city_id", nullable = false)
-    private City from;
+    City departureCity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "arrival_city_id", nullable = false)
-    private City destination;
+    City arrivalCity;
 }
