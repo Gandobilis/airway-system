@@ -13,25 +13,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.Date;
 
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PROTECTED)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AppEntity {
 
     @CreatedDate
-    @Column(name = "CREATE_DATE", updatable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @JsonIgnore
-    protected Date createdDate;
+    Date createdDate;
 
     @LastModifiedDate
-    @Column(name = "UPDATE_DATE")
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @JsonIgnore
-    protected Date lastModifiedDate;
+    Date lastModifiedDate;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "RECORD_STATE", nullable = false)
+    @Column(nullable = false)
     @JsonIgnore
-    protected RecordState recordState = RecordState.ACTIVE;
+    RecordState recordState = RecordState.ACTIVE;
 }
