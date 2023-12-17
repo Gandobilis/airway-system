@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
-    List<Flight> getFlightsByFrom(City from);
+    List<Flight> getFlightsByDepartureCity(City from);
 
     @Query("SELECT COUNT(f) FROM Flight f WHERE MONTH(f.createdDate) = :month")
     int countFlightsScheduledForMonth(@Param("month") int currentMonth);
 
-    @Query("SELECT FlightDTO(f.id, f.from.name, f.destination.name) FROM Flight f")
+    @Query("SELECT FlightDTO(f.id, f.departureCity.name, f.arrivalCity.name) FROM Flight f")
     List<FlightDTO> getAllFlightsWithCityNames();
 }

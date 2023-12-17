@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.Month;
 import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
@@ -14,8 +13,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAllByPassengerName(String passengerName);
 
     @Query("SELECT TicketDTO" +
-            "(t.id, t.flight.from.name," +
-            " t.flight.destination.name, t.passengerName)" +
+            "(t.id, t.flight.departureCity.name," +
+            " t.flight.arrivalCity.name, t.passengerName)" +
             " FROM Ticket t WHERE t.flight.id = :flightId")
     List<TicketDTO> getAllTicketsOnFlightWithCityNames(@Param("flightId") Long flightId);
 
