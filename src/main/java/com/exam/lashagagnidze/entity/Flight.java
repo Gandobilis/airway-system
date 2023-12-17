@@ -1,11 +1,9 @@
 package com.exam.lashagagnidze.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
 
 @EqualsAndHashCode(callSuper = true)
