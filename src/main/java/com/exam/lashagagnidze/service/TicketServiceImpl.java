@@ -15,12 +15,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket buyTicket(Ticket ticket) {
-        return null;
+        return ticketRepository.save(ticket);
     }
 
     @Override
     public List<TicketDTO> getAllTicketsOnFlightWithCityNames(Long flightId) {
-        return null;
+        return ticketRepository.getAllTicketsOnFlightWithCityNames(flightId);
     }
 
     @Override
